@@ -61,6 +61,16 @@ jobs:
           mysql --host=127.0.0.1 --port=3306 --user=root --password=root -e "CREATE USER IF NOT EXISTS 'laravel'@'%' IDENTIFIED BY 'password';"
           mysql --host=127.0.0.1 --port=3306 --user=root --password=root -e "GRANT ALL PRIVILEGES ON chat_app.* TO 'laravel'@'%';"
           mysql --host=127.0.0.1 --port=3306 --user=root --password=root -e "FLUSH PRIVILEGES;"
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
 
       - name: Run Migrations
         run: php artisan migrate --force
