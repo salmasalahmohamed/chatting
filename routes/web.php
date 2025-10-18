@@ -1,0 +1,18 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+
+Route::view('/', 'welcome');
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+require __DIR__.'/auth.php';
+Route::get('/chat',\App\Livewire\Chat\Index::class)->name('chat.index')->middleware(['auth']);
+Route::get('/chat/{query}',\App\Livewire\Chat\Chat::class)->name('chat')->middleware(['auth']);
+Route::get('/users',\App\Livewire\users::class)->name('users')->middleware(['auth']);
