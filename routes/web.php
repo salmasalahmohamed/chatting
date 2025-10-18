@@ -15,4 +15,4 @@ Route::view('profile', 'profile')
 require __DIR__.'/auth.php';
 Route::get('/chat',\App\Livewire\Chat\Index::class)->name('chat.index')->middleware(['auth']);
 Route::get('/chat/{query}',\App\Livewire\Chat\Chat::class)->name('chat')->middleware(['auth']);
-Route::get('/users',\App\Livewire\users::class)->name('users')->middleware(['auth']);
+Route::get('/users',\App\Livewire\Users::class)->name('users')->middleware(['auth']);
